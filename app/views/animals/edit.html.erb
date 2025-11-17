@@ -1,12 +1,9 @@
-<% content_for :title, "Editing animal" %>
+<div style="max-width: 600px;">
+  <div style="margin-bottom: 20px;">
+    <%= link_to "← Back to #{@animal.name}", animal_path(@animal), style: "color: #3498db; text-decoration: none;" %>
+  </div>
+  
+  <h1 style="color: #2c3e50; margin-bottom: 30px;">Edit <%= @animal.name %></h1>
 
-<h1>Editing animal</h1>
-
-<%= render "form", animal: @animal %>
-
-<br>
-
-<div>
-  <%= link_to "Show this animal", @animal %> |
-  <%= link_to "Back to animals", animals_path %>
+  <%= render "form", animal: @animal %>
 </div>
