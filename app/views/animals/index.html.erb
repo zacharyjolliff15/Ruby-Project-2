@@ -1,16 +1,28 @@
-<p style="color: green"><%= notice %></p>
-
-<% content_for :title, "Animals" %>
-
-<h1>Animals</h1>
-
-<div id="animals">
-  <% @animals.each do |animal| %>
-    <%= render animal %>
-    <p>
-      <%= link_to "Show this animal", animal %>
+<div style="margin-bottom: 30px;">
+  <h1 style="color: #2c3e50; margin-bottom: 10px;">Animals in Our Care</h1>
+  
+  <% if @animals.present? %>
+    <p style="color: #7f8c8d; font-size: 18px;">
+      Currently caring for <%= pluralize(@animals.size, "animal") %>
     </p>
+  <% else %>
+    <p style="color: #7f8c8d;">No animals in the system yet.</p>
   <% end %>
+  
+  <%= link_to "Add New Animal", new_animal_path, style: "
+    display: inline-block;
+    background-color: #27ae60;
+    color: white;
+    padding: 12px 24px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    margin-top: 10px;
+  " %>
 </div>
 
-<%= link_to "New animal", new_animal_path %>
+<% if @animals.present? %>
+  <div class="animals-list">
+    <%= render @animals %>
+  </div>
+<% end %>
