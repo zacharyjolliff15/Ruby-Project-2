@@ -1,37 +1,45 @@
-<div id="<%= dom_id animal %>">
-  <div>
-    <strong>Name:</strong>
-    <%= animal.name %>
+<div class="animal-card" style="
+  border: 1px solid #ddd;
+  padding: 20px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  background-color: #fafafa;
+">
+  <div style="display: flex; justify-content: space-between; align-items: start;">
+    <div style="flex: 1;">
+      <h3 style="margin: 0 0 10px 0; color: #2c3e50;">
+        <%= link_to animal.name, animal_path(animal), style: "color: #3498db; text-decoration: none;" %>
+      </h3>
+      
+      <p style="margin: 5px 0; color: #555;">
+        <strong>Species:</strong> <%= animal.species %> | 
+        <strong>Breed:</strong> <%= animal.breed %> | 
+        <strong>Age:</strong> <%= pluralize(animal.age, "year") %>
+      </p>
+      
+      <p style="margin: 5px 0; color: #7f8c8d; font-size: 14px;">
+        Added <%= time_ago_in_words(animal.created_at) %> ago
+      </p>
+      
+      <% if animal.notes.present? %>
+        <p style="margin: 10px 0 0 0; color: #666; font-style: italic;">
+          <%= truncate(animal.notes, length: 100) %>
+        </p>
+      <% end %>
+    </div>
+    
+    <div style="margin-left: 20px;">
+      <span style="
+        display: inline-block;
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-weight: bold;
+        font-size: 14px;
+        background-color: <%= animal.adopted ? '#27ae60' : '#e67e22' %>;
+        color: white;
+      ">
+        <%= animal.adopted ? "✓ Adopted" : "Available" %>
+      </span>
+    </div>
   </div>
-
-  <div>
-    <strong>Species:</strong>
-    <%= animal.species %>
-  </div>
-
-  <div>
-    <strong>Breed:</strong>
-    <%= animal.breed %>
-  </div>
-
-  <div>
-    <strong>Age:</strong>
-    <%= animal.age %>
-  </div>
-
-  <div>
-    <strong>Intake date:</strong>
-    <%= animal.intake_date %>
-  </div>
-
-  <div>
-    <strong>Adopted:</strong>
-    <%= animal.adopted %>
-  </div>
-
-  <div>
-    <strong>Notes:</strong>
-    <%= animal.notes %>
-  </div>
-
 </div>
