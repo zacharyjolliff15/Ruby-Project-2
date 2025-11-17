@@ -11,21 +11,11 @@ The Animal Shelter Intake System is a simple web application designed to help an
 
 Each animal record will include:
 - Name
-- Species (e.g., Dog, Cat)
+- Species 
 - Breed
 - Age
-- Intake date (when the animal arrived at the shelter)
-- Adoption status (adopted or available)
-- Notes (additional information about the animal)
-
-The application demonstrates proper use of:
-- RESTful routing and all seven standard Rails actions
-- MVC (Model-View-Controller) architecture
-- ERB templates for dynamic content rendering
-- Partials for DRY (Don't Repeat Yourself) code organization
-- Rails helpers (pluralize, time_ago_in_words, link_to, simple_format)
-- Flash messages for user feedback
-- Form validation and error handling
+- Intake date 
+- Adoption status
 
 SETUP INSTRUCTIONS
 
@@ -83,7 +73,7 @@ db/
 KNOWN ISSUES
 
 
-None at this time. All CRUD operations function properly and all requirements have been implemented.
+None at this time. All CRUD operations function properly and all requirements have been implemented, occasinal bug of adding 8 animals in seeding face/
 
 
 POTENTIAL ENHANCEMENTS
@@ -92,36 +82,12 @@ POTENTIAL ENHANCEMENTS
 Future improvements could include:
 - User authentication for shelter staff
 - Photo upload capability for animal images
-- Search and filter functionality (by species, adoption status, etc.)
-- Pagination for large numbers of animals
-- Export data to CSV or PDF
-- Email notifications when animals are adopted
-
-- Calendar view for intake dates
-- Statistics dashboard showing shelter metrics
 - Integration with external adoption platforms
-
-
-TESTING
-
-
-Manual testing completed for:
-✓ Creating new animals (with valid and invalid data)
-✓ Viewing the list of all animals
-✓ Viewing individual animal details
-✓ Editing existing animal records
-✓ Deleting animals (with confirmation)
-✓ Flash messages appear correctly
-✓ Validation errors display properly
-✓ Time helpers show correct relative times
-✓ Pluralization works correctly
-✓ Navigation links function properly
 
 
 RESOURCES USED
 
 
 - Rails Guides: https://guides.rubyonrails.org/
-- Project specification document (csi2340_proj2_fa25.pdf)
 - Rails API documentation
 - Class lecture notes (Lectures 3-7)
