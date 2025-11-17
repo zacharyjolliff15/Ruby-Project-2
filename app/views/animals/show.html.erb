@@ -1,10 +1,86 @@
-<p style="color: green"><%= notice %></p>
-
-<%= render @animal %>
-
-<div>
-  <%= link_to "Edit this animal", edit_animal_path(@animal) %> |
-  <%= link_to "Back to animals", animals_path %>
-
-  <%= button_to "Destroy this animal", @animal, method: :delete %>
+<div style="max-width: 800px;">
+  <div style="margin-bottom: 20px;">
+    <%= link_to "← Back to All Animals", animals_path, style: "color: #3498db; text-decoration: none;" %>
+  </div>
+  
+  <div style="background-color: #f8f9fa; padding: 30px; border-radius: 8px; border-left: 5px solid #3498db;">
+    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 20px;">
+      <h1 style="margin: 0; color: #2c3e50;"><%= @animal.name %></h1>
+      <span style="
+        padding: 10px 20px;
+        border-radius: 25px;
+        font-weight: bold;
+        background-color: <%= @animal.adopted ? '#27ae60' : '#e67e22' %>;
+        color: white;
+      ">
+        <%= @animal.adopted ? "✓ Adopted" : "Available for Adoption" %>
+      </span>
+    </div>
+    
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px;">
+      <div>
+        <p style="margin: 10px 0;">
+          <strong style="color: #7f8c8d;">Species:</strong><br>
+          <span style="font-size: 18px; color: #2c3e50;"><%= @animal.species %></span>
+        </p>
+        
+        <p style="margin: 10px 0;">
+          <strong style="color: #7f8c8d;">Breed:</strong><br>
+          <span style="font-size: 18px; color: #2c3e50;"><%= @animal.breed %></span>
+        </p>
+      </div>
+      
+      <div>
+        <p style="margin: 10px 0;">
+          <strong style="color: #7f8c8d;">Age:</strong><br>
+          <span style="font-size: 18px; color: #2c3e50;"><%= pluralize(@animal.age, "year") %> old</span>
+        </p>
+        
+        <p style="margin: 10px 0;">
+          <strong style="color: #7f8c8d;">Intake Date:</strong><br>
+          <span style="font-size: 18px; color: #2c3e50;"><%= @animal.intake_date.strftime("%B %d, %Y") %></span>
+        </p>
+      </div>
+    </div>
+    
+    <% if @animal.notes.present? %>
+      <div style="margin-top: 25px; padding-top: 25px; border-top: 1px solid #ddd;">
+        <p style="margin: 0 0 10px 0;">
+          <strong style="color: #7f8c8d;">Notes:</strong>
+        </p>
+        <div style="color: #2c3e50; line-height: 1.6;">
+          <%= simple_format(@animal.notes) %>
+        </div>
+      </div>
+    <% end %>
+    
+    <div style="margin-top: 25px; padding-top: 25px; border-top: 1px solid #ddd;">
+      <p style="color: #95a5a6; font-size: 14px; margin: 0;">
+        Record created <%= time_ago_in_words(@animal.created_at) %> ago
+      </p>
+    </div>
+  </div>
+  
+  <div style="margin-top: 30px; display: flex; gap: 10px;">
+    <%= link_to "Edit Information", edit_animal_path(@animal), style: "
+      background-color: #3498db;
+      color: white;
+      padding: 12px 24px;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+    " %>
+    
+    <%= button_to "Delete Animal", animal_path(@animal), method: :delete, 
+        data: { confirm: "Are you sure you want to delete #{@animal.name}?" },
+        style: "
+          background-color: #e74c3c;
+          color: white;
+          padding: 12px 24px;
+          border: none;
+          border-radius: 5px;
+          font-weight: bold;
+          cursor: pointer;
+        " %>
+  </div>
 </div>
