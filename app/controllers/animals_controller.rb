@@ -1,12 +1,12 @@
 class AnimalsController < ApplicationController
   before_action :set_animal, only: %i[ show edit update destroy ]
 
-  # GET /animals or /animals.json
+  # GET /animals
   def index
-    @animals = Animal.all
+    @animals = Animal.all.order(created_at: :desc)
   end
 
-  # GET /animals/1 or /animals/1.json
+  # GET /animals/1
   def show
   end
 
@@ -19,52 +19,40 @@ class AnimalsController < ApplicationController
   def edit
   end
 
-  # POST /animals or /animals.json
+  # POST /animals
   def create
     @animal = Animal.new(animal_params)
 
-    respond_to do |format|
-      if @animal.save
-        format.html { redirect_to @animal, notice: "Animal was successfully created." }
-        format.json { render :show, status: :created, location: @animal }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @animal.errors, status: :unprocessable_entity }
-      end
+    if @animal.save
+      redirect_to @animal, notice: "Animal was successfully added to the shelter."
+    else
+      render :new, status: :unprocessable_entity
     end
   end
 
-  # PATCH/PUT /animals/1 or /animals/1.json
+  # PATCH/PUT /animals/1
   def update
-    respond_to do |format|
-      if @animal.update(animal_params)
-        format.html { redirect_to @animal, notice: "Animal was successfully updated.", status: :see_other }
-        format.json { render :show, status: :ok, location: @animal }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @animal.errors, status: :unprocessable_entity }
-      end
+    if @animal.update(animal_params)
+      redirect_to @animal, notice: "Animal information was successfully updated."
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
-  # DELETE /animals/1 or /animals/1.json
+  # DELETE /animals/1
   def destroy
     @animal.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to animals_path, notice: "Animal was successfully destroyed.", status: :see_other }
-      format.json { head :no_content }
-    end
+    redirect_to animals_url, notice: "Animal was successfully removed from the system."
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_animal
-      @animal = Animal.find(params.expect(:id))
+      @animal = Animal.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def animal_params
-      params.expect(animal: [ :name, :species, :breed, :age, :intake_date, :adopted, :notes ])
+      params.require(:animal).permit(:name, :species, :breed, :age, :intake_date, :adopted, :notes)
     end
 end
